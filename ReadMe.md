@@ -15,7 +15,7 @@ Folgender Graph wird in der Aufgabe umgesetzt:
 
 Hierbei bedeuten die Kanten, dass die Informationen aus einem Kurs in dem anderen gebraucht werden.\
 
-Um den Graphen in die Datenbank einzufügen wird ein Cypher [Skript](./Aufg2/courses) verwendet.\
+Um den Graphen in die Datenbank einzufügen wird ein Cypher [Skript](./Aufg2/cypher_code.txt) verwendet.\
 Im ersten Teil des Skriptes werden alle bisherigen besuchten Kurse als Knoten hinzugefügt.
 Dies geschieht mit Hilfe folgender Notation:
 
@@ -29,6 +29,22 @@ Um Relations zu definieren wird folgende Notation verwendet, wobei wir davon aus
 ```
 CREATE (a)-[:USED_IN]->(b)
 ```
+
+Um auf die Daten zuzugreifen werden Cypher [Queries](./Aufg2/cypher_queries.txt) verwendet.
+Um herauszufinden, welche Module für NoSQL/BigData nützlich sind, haben wir folgende Query verwendet:
+
+```
+MATCH (c1:Course)-[:USED_IN]->(c2:Course) WHERE c2.name = "NOSQL" RETURN c1
+```
+
+Um herauszufinden, welche Module bisher im Studium nicht wieder genutzt wurden haben wir folgende Queries verwendet:
+
+```
+MATCH (c1:Course) WHERE NOT (c1)-[:USED_IN]->() RETURN c1
+MATCH (c1:Course) WHERE NOT exists((c1)-[:USED_IN]->()) RETURN c1
+```
+
+Hierbei ist die zweite Query (laut des Neo4j-Browsers) anders als die erste nicht deprecated.
 
 ## Aufgabe 6
 
