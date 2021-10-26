@@ -1,0 +1,164 @@
+MATCH (n {id: "/c/en/baseball"})-[r:IsA]-(res) RETURN res
+
+//returns:
+{
+  "identity": 939378,
+  "labels": [],
+  "properties": {
+"id": "/c/en/ml_b.com"
+  }
+}
+{
+  "identity": 432989,
+  "labels": [],
+  "properties": {
+"id": "/c/en/fangraphs"
+  }
+}
+{
+  "identity": 432681,
+  "labels": [],
+  "properties": {
+"id": "/c/en/seattle_mariner_hall_of_fame"
+  }
+}
+{
+  "identity": 239982,
+  "labels": [],
+  "properties": {
+"id": "/c/en/baseball-reference.com"
+  }
+}
+{
+  "identity": 7633,
+  "labels": [],
+  "properties": {
+"id": "/c/en/hobby"
+  }
+}
+{
+  "identity": 4077,
+  "labels": [],
+  "properties": {
+"id": "/c/en/baseball_player"
+  }
+}
+{
+  "identity": 9171,
+  "labels": [],
+  "properties": {
+"id": "/c/en/music_group"
+  }
+}
+{
+  "identity": 881,
+  "labels": [],
+  "properties": {
+"id": "/c/en/organization"
+  }
+}
+{
+  "identity": 537639,
+  "labels": [],
+  "properties": {
+"id": "/c/en/organisation"
+  }
+}
+{
+  "identity": 3595,
+  "labels": [],
+  "properties": {
+"id": "/c/en/band"
+  }
+}
+{
+  "identity": 355,
+  "labels": [],
+  "properties": {
+"id": "/c/en/person"
+  }
+}
+{
+  "identity": 1591,
+  "labels": [],
+  "properties": {
+"id": "/c/en/athlete"
+  }
+}
+{
+  "identity": 538102,
+  "labels": [],
+  "properties": {
+"id": "/c/en/gridiron_football_player"
+  }
+}
+{
+  "identity": 3760,
+  "labels": [],
+  "properties": {
+"id": "/c/en/activity"
+  }
+}
+{
+  "identity": 299,
+  "labels": [],
+  "properties": {
+"id": "/c/en/sport"
+  }
+}
+{
+  "identity": 61052,
+  "labels": [],
+  "properties": {
+"id": "/c/en/c++"
+  }
+}
+{
+  "identity": 61050,
+  "labels": [],
+  "properties": {
+"id": "/c/en/perl"
+  }
+}
+{
+  "identity": 42619,
+  "labels": [],
+  "properties": {
+"id": "/c/en/firewood"
+  }
+}
+{
+  "identity": 38920,
+  "labels": [],
+  "properties": {
+"id": "/c/en/speech"
+  }
+}
+{
+  "identity": 15209,
+  "labels": [],
+  "properties": {
+"id": "/c/en/good_before_all_player"
+  }
+}
+{
+  "identity": 13592,
+  "labels": [],
+  "properties": {
+"id": "/c/en/not_play_professionally"
+  }
+}
+{
+  "identity": 1686,
+  "labels": [],
+  "properties": {
+"id": "/c/en/popular_sport"
+  }
+}
+{
+  "identity": 64,
+  "labels": [],
+  "properties": {
+"id": "/c/en/game"
+  }
+}
