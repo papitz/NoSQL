@@ -10,7 +10,12 @@ siehe https://github.com/BennyOe/S6NoSQL
 
 ## Aufgabe 5
 
-[Skript](./Aufg2/courses)\
+Folgender Graph wird in der Aufgabe umgesetzt:
+![Graph](./Aufg2/courses.png)
+
+Hierbei bedeuten die Kanten, dass die Informationen aus einem Kurs in dem anderen gebraucht werden.\
+
+Um den Graphen in die Datenbank einzufügen wird ein Cypher [Skript](./Aufg2/courses) verwendet.\
 Im ersten Teil des Skriptes werden alle bisherigen besuchten Kurse als Knoten hinzugefügt.
 Dies geschieht mit Hilfe folgender Notation:
 
