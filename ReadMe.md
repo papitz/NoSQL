@@ -48,6 +48,7 @@ Hierbei ist die zweite Query (laut des Neo4j-Browsers) anders als die erste nich
 
 ## Aufgabe 6
 
+Daten (hier)[http://nosqlzkn.ful.informatik.haw-hamburg.de/conceptnet.graph.db-v4.tar.gz]\
 Um die Daten zu importieren, müssen sie per `docker cp SOURCE_DIR CONTAINER_NAME:/data/` in die docker volume der neo4j Datenbank kopiert werden.
 In dem Neo4j-Browser kann nun die entsprechende Datenbank ausgewählt werden. Eventuell muss der Docker-Container zunächst neu gestartet werden.\
 Die Anfrage die gestellt werden muss ist:
