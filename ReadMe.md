@@ -50,8 +50,9 @@ Hierbei ist die zweite Query (laut des Neo4j-Browsers) anders als die erste nich
 
 Daten [hier](http://nosqlzkn.ful.informatik.haw-hamburg.de/conceptnet.graph.db-v4.tar.gz)\
 Daten in dem docker Container müssen zunächst entfernt werden.
-Hierzu mit dem Befehl 'docker exec -it neo4j-conceptnet /bin/bash' in den Container.
-Dann mit dem Befehl 'rm -rf /data/\*' alle Daten in data entfernen.
+Hierzu mit dem Befehl `docker exec -it neo4j-conceptnet /bin/bash` in den Container.
+Dann mit dem Befehl `rm -rf /data/\*` alle Daten in data entfernen.
+Die Daten werden mit dem Befehl `tar xf DATEI` entpackt.
 Um die Daten zu importieren, müssen sie per `docker cp SOURCE_DIR CONTAINER_NAME:/data/` in die docker volume der neo4j Datenbank kopiert werden.
 In dem Neo4j-Browser kann nun die entsprechende Datenbank ausgewählt werden. Eventuell muss der Docker-Container zunächst neu gestartet werden.\
 Die Anfrage die gestellt werden muss ist:
