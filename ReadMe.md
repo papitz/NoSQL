@@ -6,7 +6,20 @@ Dokumentation siehe Ordner Aufg1
 
 ## Aufgabe 4
 
-siehe https://github.com/BennyOe/S6NoSQL
+## to run the app
+
+    cd Aufg2/node/
+    docker run -d -p 6379:6379  --name my-redis redis
+    node .
+    docker exec -it my-redis redis-cli
+
+Als struktur wurde eine Hashmap gewählt (hset).
+Der Key ist dabei die PLZ (\_id) und die anderen Attribute die Values.
+Durch diese Wahl kann nach der id gesucht werden und die zugehörige Stadt und der Staat angezeigt werden (Aufgabe a)
+
+Für Aufgabe c wird ein weitere Index benötigt, der als Set (sadd) definiert ist und bei dem das Attribut "city" als Key verwendet wird.
+Die PLZ (id) wird dabei als Value verwendet, was den Vorteil bietet, dass doppelte Einträge eleminiert werden.
+Über smembers werden die zugehörigen Postleitzahlen in einem Array ausgegeben.
 
 ## Aufgabe 5
 
@@ -62,3 +75,136 @@ MATCH (n {id: "/c/en/baseball"})-[r:IsA]-(res) RETURN res
 ```
 
 Das Ergebnis dieser ist [hier](./Aufg2/result_aufg6.txt) zu finden.
+
+## Aufgabe 7
+
+Redis LoC: 36
+Mongo LoC: 25
+Der Aufwand, um MongoDB in das besetehende Projekt einzubinden war sehr gering.
+Zeitmessungen:
+
+-   Befüllen:
+    -   Redis: 0.19ms
+    -   Mongo: 71.12ms
+-   Query:
+    -   Redis:
+        -   PLZ: 0.147ms
+        -   City: 0.149ms
+    -   Mongo:
+        -   PLZ: 1.028ms
+        -   City: 2.648ms
+
+## Aufgabe 8
+
+a)
+Einfügen der Dokumente mit Hilfe von Robo3t.\
+
+```
+db.fussball.insert({name: 'HSV', gruendung: new Date(1887, 09, 29), farben: ['weiss', 'rot'], Tabellenplatz: 17, nike: 'n'});
+db.fussball.insert({name: 'Dortmund', gruendung: new Date(1909, 12, 19), farben: ['gelb', 'schwarz'], Tabellenplatz: 16, nike: 'n'});
+db.fussball.insert({name: 'Schalke', gruendung: new Date(1904, 5, 4), farben: ['blau'], Tabellenplatz: 15, nike: 'n'});
+db.fussball.insert({name: 'Paderborn', gruendung: new Date(1907, 8, 14), farben:['blau', 'weiss'], Tabellenplatz:14, nike:'n'});
+db.fussball.insert({name: 'Hertha', gruendung: new Date(1892, 7, 25), farben: ['blau', 'weiss'], Tabellenplatz: 13, nike: 'j'});
+db.fussball.insert({name: 'Augsburg', gruendung: new Date(1907, 8, 8), farben: ['rot', 'weiss'], Tabellenplatz: 12,  nike: 'j'});
+db.fussball.insert({name: 'Pauli', gruendung: new Date(1910, 5, 15), farben: ['braun', 'weiss'], Tabellenplatz: 11, nike: 'n'});
+db.fussball.insert({name: 'Gladbach', gruendung: new Date(1900, 8,1), farben: ['schwarz', 'weiss', 'gruen'], Tabellenplatz: 10, nike: 'n'});
+db.fussball.insert({name: 'Frankfurt', gruendung: new Date(1899, 3, 8), farben: ['rot', 'schwarz', 'weiss'], Tabellenplatz: 9, nike: 'j'});
+db.fussball.insert({name: 'Leverkusen', gruendung: new Date(1904, 11, 20), farben: ['rot', 'schwarz'], Tabellenplatz: 8, nike: 'n'});
+db.fussball.insert({name: 'Stuttgart', gruendung: new Date(1893, 9, 9), farben: ['rot', 'weiss'], Tabellenplatz: 7, nike: 'n'});
+db.fussball.insert({name: 'Werder', gruendung: new Date(1899,2,4), farben: ['gruen','weiss'], Tabellenplatz: 6, nike: 'j'});
+```
+
+b)
+Lassen Sie sich nun die Vereine mit den jeweils folgenden Eigenschaften anzeigen:
+
+1. mit Namen ‚Augsburg‘
+
+```
+db.getCollection('fussball').find({name: 'Augsburg'})
+```
+
+2. alle Nike-Vereine, welche schwarz als mindestens eine Vereinsfarbe haben
+
+```
+db.getCollection('fussball').find({nike: 'j', farben: 'schwarz'})
+```
+
+3. alle Nike-Vereine, welche weiss und grün als Vereinsfarbe haben
+
+```
+db.getCollection('fussball').find({nike: 'j', farben: {$all: ['weiss', 'gruen']}})
+```
+
+4. alle Nike-Vereine, welche weiss oder grün als Vereinsfarbe haben
+
+```
+db.getCollection('fussball').find({nike: 'j', farben: {$all: ['gruen']}, farben: {$all: ['weiss']}})
+```
+
+5. den Verein mit dem höchsten Tabellenplatz
+
+```
+db.fussball.find().sort({Tabellenplatz:+1}).limit(1)
+```
+
+6. alle Vereine, die nicht auf einem Abstiegsplatz stehen
+
+```
+db.fussball.find({Tabellenplatz: {$lt: 17}})
+```
+
+c)
+Alle Nike vereine (\_id soll unterdrückt werden)
+
+```
+db.fussball.find({nike:'j'}, {'_id':false})
+```
+
+d)
+Folgende Änderungsoperation wird ausgeführt:
+
+```
+db.fussball.update({name: 'Augsburg'}, {Tabellenplatz: 1})
+```
+
+Es ist zu beobachten, dass das Dokument komplett ersetzt wird. D.h. an Stelle des Ursprünglichen Augsburg Dokumentes ist nun ein Dokument, in dem nur der Tabellenplatz gelistet ist.
+Um die Änderung rückgängig zu machen, wird folgender Befehl verwendet:
+
+```
+db.fussball.update({Tabellenplatz: 1}, {name: 'Augsburg', gruendung: new Date(1907, 8, 8), farben: ['rot', 'weiss'], Tabellenplatz: 12,  nike: 'j'});
+```
+
+e)
+
+1. Ändern sie den Tabellenplatz von Leverkusen auf 2
+
+```
+db.fussball.update({name: 'Leverkusen'}, {$set: {Tabellenplatz: 2}})
+```
+
+2. Werder soll um einen Tabellenplatz nach vorne gebracht werden
+
+```
+db.fussball.update({name: 'Werder'}, {$inc: {Tabellenplatz: -1}})
+```
+
+3. Ergänzen sie für den HSV ein Attribut „abgestiegen“ mit einem sinnvollen Wert
+
+```
+db.fussball.update({name: 'HSV'}, {$set: {abgestiegen: 'niemals zweite Liiiigaaa ;)'}})
+```
+
+4. Ergänzen sie für alle Vereine, deren Vereinsfarbe weiss enthält, ein Attribut „Waschtemperatur“
+
+```
+
+db.fussball.updateMany({farben: {$all: ['weiss']}}, {$set: {Waschtemperatur: 90}})
+```
+
+## Aufgabe 9
+
+Installieren von dem Cassandras
+
+```
+docker run --name our-cassandra -d cassandra:latest
+```

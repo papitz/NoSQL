@@ -1,0 +1,12 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    container_name: our-redis
+    ports:
+      - "6379:6379"
+  mongodb:
+    image: mongo
+    container_name: our-mongodb
+    ports:
+      - "27017:27017"
