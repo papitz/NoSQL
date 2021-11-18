@@ -208,3 +208,33 @@ Installieren von dem Cassandras
 ```
 docker run --name our-cassandra -d cassandra:latest
 ```
+## Aufgabe 11
+
+Git Repo clonen mit `gcl git@github.com:big-data-europe/docker-hadoop.git`
+
+Docker Image starten mit `docker-compose up`
+
+Jar Datei erstellen, oder [diese](https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-examples/2.7.1/hadoop-mapreduce-examples-2.7.1-sources.jar) herunterladen.
+
+kopieren der Jar Datei in den Container `docker cp hadoop-mapreduce-examples-2.7.1-sources.jar namenode:/tmp/`
+
+textdatei erstellen als `simple-text.txt`
+
+Textdatei in den Container kopieren `docker cp simple-text.txt namenode:/tmp/`
+
+Shell auf dem Namenode öffnen `ocker exec -it namenode /bin/bash`
+
+Input Directory erstellen `hdfs dfs -mkdir -p /user/root/input`
+
+In den `tmp` ordner wechseln und die Textdatei in den `input` Ordner kopieren `hdfs dfs -put simple-text.txt /user/root/input`
+
+den Map Reduce Job ausführen `hadoop jar hadoop-mapreduce-examples-2.7.1-sources.jar org.apache.hadoop.examples.WordCount input output`
+
+    - org.apache.hadoop.examples is the class.
+    - WordCount is the function.
+    - input is the directory where we have our file.
+    - output where the files will be generated.
+    
+Testen, ob es erfolgreich war `hdfs dfs -ls /user/root/output`
+
+Das Ergebnis anzeigen `hdfs dfs -cat /user/root/output/part-r-00000`
