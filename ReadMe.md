@@ -238,3 +238,6 @@ den Map Reduce Job ausführen `hadoop jar hadoop-mapreduce-examples-2.7.1-source
 Testen, ob es erfolgreich war `hdfs dfs -ls /user/root/output`
 
 Das Ergebnis anzeigen `hdfs dfs -cat /user/root/output/part-r-00000`
+
+Um die Hadoop Nodes IPs anzuzeigen `docker network inspect docker-hadoop_default`
+Um das Ergebnis in den Docker Container zu kopieren `hdfs dfs -getmerge /user/root/output/part-r-00000 /home/benni/file.txt`
