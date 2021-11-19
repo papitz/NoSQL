@@ -222,7 +222,7 @@ textdatei erstellen als `simple-text.txt`
 
 Textdatei in den Container kopieren `docker cp simple-text.txt namenode:/tmp/`
 
-Shell auf dem Namenode öffnen `ocker exec -it namenode /bin/bash`
+Shell auf dem Namenode öffnen `docker exec -it namenode /bin/bash`
 
 Input Directory erstellen `hdfs dfs -mkdir -p /user/root/input`
 
