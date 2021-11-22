@@ -204,7 +204,10 @@ db.fussball.updateMany({farben: {$all: ['weiss']}}, {$set: {Waschtemperatur: 90}
 ## Aufgabe 9
 
 Installieren von dem Cassandr## Aufgabe 7
-
+Zum testen ob fussball drinne is:
+```
+select * from plz.data where fussball = 'Ja' allow filtering
+```
 Redis LoC: 36
 Mongo LoC: 25
 Cassandra LoC: 28
