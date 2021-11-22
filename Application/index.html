@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redis search</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="dbwrapper">
+            <h2>Redis DB</h2>
+            <div class="bar">
+                <h3>Know the zip code?</h3>
+                <form>
+                    <input v-model="redisPlz" ref="redisPlz" type="text" placeholder="enter the zip-code"><br>
+                </form>
+                <button @click="redisGetCity()">Search for city and state</button>
+                <h3 v-if="redisCity">The city is: {{redisCity}}</h3>
+                <h3 v-if="redisState"> The state is: {{redisState}}</h3>
+                <h3 v-if="redisPop"> The population is: {{redisPop}}</h3>
+                <h3 v-if="redisLoc"> The location is: {{redisLoc}}</h3>
+                <h3 v-if="redisPlzError">{{redisPlzError}}</h3>
+            </div>
+
+            <div class="bar">
+                <h3>Know the name of the city?</h3>
+                <form>
+                    <input v-model="redisCity" ref="redisCity" type="text" placeholder="enter the city"><br>
+                </form>
+                <button @click="redisGetZipCode()">Search for zip code</button><br>
+                <span v-if="redisZipCodes.length">These are the zip codes <br>{{redisZipCodes}}</span>
+                <h3 v-if="redisPlz">{{redisCityError}}</h3>
+            </div>
+        </div>
+
+        <div class="dbwrapper">
+            <h2>Mongo DB</h2>
+            <div class="bar">
+                <h3>Know the zip code?</h3>
+                <form>
+                    <input v-model="moPlz" ref="moPlz" type="text" placeholder="enter the zip-code"><br>
+                </form>
+                <button @click="moGetCity()">Search for city and state</button>
+                <h3 v-if="moCity">The city is: {{moCity}}</h3>
+                <h3 v-if="moState"> The state is: {{moState}}</h3>
+                <h3 v-if="moPop"> The population is: {{moPop}}</h3>
+                <h3 v-if="moLoc"> The location is: {{moLoc}}</h3>
+                <h3 v-if="moPlzError">{{moPlzError}}</h3>
+            </div>
+
+            <div class="bar">
+                <h3>Know the name of the city?</h3>
+                <form>
+                    <input v-model="moCity" ref="moCity" type="text" placeholder="enter the city"><br>
+                </form>
+                <button @click="moGetZipCode()">Search for zip code</button><br>
+                <span v-if="moZipCodes.length">These are the zip codes <br>{{moZipCodes}}</span>
+                <h3 v-if="moPlz">{{moCityError}}</h3>
+            </div>
+        </div>
+
+        <div class="dbwrapper">
+            <h2>Cassandra</h2>
+            <div class="bar">
+                <h3>Know the zip code?</h3>
+                <form>
+                    <input v-model="cassPlz" ref="cassPlz" type="text" placeholder="enter the zip-code"><br>
+                </form>
+                <button @click="cassGetCity()">Search for city and state</button>
+                <h3 v-if="cassCity">The city is: {{cassCity}}</h3>
+                <h3 v-if="cassState"> The state is: {{cassState}}</h3>
+                <h3 v-if="cassPop"> The population is: {{cassPop}}</h3>
+                <h3 v-if="cassLoc"> The location is: {{cassLoc}}</h3>
+                <h3 v-if="cassPlzError">{{cassPlzError}}</h3>
+            </div>
+
+            <div class="bar">
+                <h3>Know the name of the city?</h3>
+                <form>
+                    <input v-model="cassCity" ref="cassCity" type="text" placeholder="enter the city"><br>
+                </form>
+                <button @click="cassGetZipCode()">Search for zip code</button><br>
+                <span v-if="cassZipCodes.length">These are the zip codes <br>{{cassZipCodes}}</span>
+                <h3 v-if="cassPlz">{{cassCityError}}</h3>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+</body>
