@@ -203,11 +203,33 @@ db.fussball.updateMany({farben: {$all: ['weiss']}}, {$set: {Waschtemperatur: 90}
 
 ## Aufgabe 9
 
-Installieren von dem Cassandras
+Installieren von dem Cassandr## Aufgabe 7
+
+Redis LoC: 36
+Mongo LoC: 25
+Cassandra LoC: 28
+Der Aufwand, um Cassandra in das besetehende Projekt einzubinden war relativ gering.
+Zeitmessungen:
+
+-   Befüllen:
+    -   Redis: 0.19ms
+    -   Mongo: 71.12ms
+    -   Cassandra: 10.28s
+-   Query:
+    -   Redis:
+        -   PLZ: 0.147ms
+        -   City: 0.149ms
+    -   Mongo:
+        -   PLZ: 1.028ms
+        -   City: 2.648ms
+    -   Cassandra:
+        - PLZ: 0.37ms
+        - City: 0.436ms
 
 ```
 docker run --name our-cassandra -d cassandra:latest
 ```
+
 ## Aufgabe 11
 
 Git Repo clonen mit `gcl git@github.com:big-data-europe/docker-hadoop.git`
